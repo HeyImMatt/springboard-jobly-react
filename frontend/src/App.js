@@ -1,11 +1,11 @@
 import React from 'react';
-import Navbar from './Navbar';
+import AppNav from './AppNav';
 import Routes from './Routes';
 
 export default function App() {
   return (
     <>
-      <Navbar />
+      <AppNav />
       <Routes />
     </>
   );
