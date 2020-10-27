@@ -48,11 +48,13 @@ export default function Companies() {
             submitHandler={submitHandler}
             formData={formData}
           />
-          {companies.map(company => (<CompanyCard 
+          {companies.map(company => (<CompanyCard
             description={company.description}
+            handle={company.handle}
             key={uuidv4()}
             name={company.name}
           />))}
+          {companies !== [] && <p>No Companies Found</p>}
         </Col>
       </Row>
     </Container>
