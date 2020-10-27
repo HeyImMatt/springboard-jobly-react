@@ -9,8 +9,7 @@ import JoblyApi from './JoblyApi';
 
 export default function Companies() {
   const [isLoading, setIsLoading] = useState(true);
-  const [companies, setCompanies] = useState({});
-  // const [searchResults, setSearchResults] = useState(false);
+  const [companies, setCompanies] = useState([]);
   const [formData, setFormData] = useState({ search: '' })
 
   useEffect(() => {
@@ -53,7 +52,6 @@ export default function Companies() {
             description={company.description}
             key={uuidv4()}
             name={company.name}
-            logo_url={company.logo_url}
           />))}
         </Col>
       </Row>
