@@ -7,7 +7,7 @@ import './CompanyCard.css'
 export default function CompanyCard(props) {
   const { handle, name, description } = props;
   return (
-    <Link to={`/company/${handle}`}>
+    <Link to={`/companies/${handle}`}>
       <Card className="mb-3">
         <Card.Body>
           <Card.Title className="d-inline-block">{name}</Card.Title>

@@ -54,7 +54,7 @@ export default function Companies() {
             key={uuidv4()}
             name={company.name}
           />))}
-          {companies !== [] && <p>No Companies Found</p>}
+          {companies === [] && <p>No Companies Found</p>}
         </Col>
       </Row>
     </Container>

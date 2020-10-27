@@ -16,7 +16,7 @@ export default function Routes() {
       <Route exact path="/companies">
         <Companies />
       </Route>
-      <Route exact path="/companies/:id">
+      <Route exact path="/companies/:handle">
         <Company />
       </Route>
       <Route exact path="/jobs">
