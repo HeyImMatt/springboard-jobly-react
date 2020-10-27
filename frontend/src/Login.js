@@ -39,8 +39,8 @@ export default function Login({ setToken }) {
       data = {
         username: formData.username,
         password: formData.password,
-        first_name: formData.first_name || undefined,
-        last_name: formData.last_name || undefined,
+        first_name: formData.firstName || undefined,
+        last_name: formData.lastName || undefined,
         email: formData.email || undefined
       };
       endpoint = "register";
@@ -124,7 +124,7 @@ export default function Login({ setToken }) {
                     <Form.Control 
                       className="mb-2"
                       onChange={changeHandler} 
-                      type="text" 
+                      type="email" 
                       name="email" 
                       value={formData.email} 
                       />
