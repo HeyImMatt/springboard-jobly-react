@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { TOKEN_STORAGE_ID } from "./App.js"
 
-const BASE_URL = process.env.BASE_URL || "http://localhost:3001";
+const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
 export default class JoblyApi {
   static async request(endpoint, params = {}, verb = "get") {
