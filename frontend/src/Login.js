@@ -131,7 +131,7 @@ export default function Login({ setToken }) {
                   </>}
                 </Form.Group>
                 {formData.errors.length > 0 &&
-                <Alert type="danger" messages={formData.errors} />}
+                <Alert variant="danger">{formData.errors}</Alert>}
                 <Button className="d-block ml-auto" variant="info" type="submit">
                   {activeView === 'login' ? 'Login' : 'Register'}
                 </Button>
