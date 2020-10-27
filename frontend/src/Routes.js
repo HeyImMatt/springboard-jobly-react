@@ -7,7 +7,7 @@ import Jobs from './Jobs';
 import Login from './Login';
 import Profile from './Profile';
 
-export default function Routes() {
+export default function Routes({ setToken }) {
   return (
     <Switch>
       <Route exact path="/">
@@ -23,7 +23,7 @@ export default function Routes() {
         <Jobs />
       </Route>
       <Route exact path="/login">
-        <Login />
+        <Login setToken={setToken} />
       </Route>
       <Route exact path="/profile">
         <Profile />
