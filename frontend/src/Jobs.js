@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import JobCard from './JobCard';
 import SearchForm from './SearchForm';
 import JoblyApi from './JoblyApi';
+import UserContext from "./UserContext";
 
 export default function Jobs() {
+  const { currentUser, setCurrentUser } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
   const [jobs, setJobs] = useState([]);
   const [formData, setFormData] = useState({ search: '' })
@@ -35,6 +37,23 @@ export default function Jobs() {
     setFormData({ search: '' });
   }
 
+  const applyHandler = async (id) => {
+    await JoblyApi.applyToJob(id);
+    setCurrentUser({
+      ...currentUser,
+      jobs: [...currentUser.jobs, { id }]
+    });
+  }
+
+  const checkAppliedFor = (id) => {
+    for (let [k, v] of Object.entries(currentUser.jobs)) {
+      if (v.id === id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   if (isLoading) {
     return <p>Loading &hellip;</p>;
   }
@@ -48,7 +67,10 @@ export default function Jobs() {
             formData={formData}
           />
           {jobs.map(job => (<JobCard 
+            appliedFor={checkAppliedFor(job.id)}
+            applyHandler={applyHandler}
             equity={job.equity}
+            id={job.id}
             key={job.id}
             salary={job.salary}
             title={job.title}

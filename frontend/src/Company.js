@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import JobCard from './JobCard';
 import JoblyApi from './JoblyApi';
+import UserContext from "./UserContext";
 
 export default function Company() {
+  const { currentUser, setCurrentUser } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
   const [company, setCompany] = useState({});
   const [jobs, setJobs] = useState([]);
@@ -24,6 +26,23 @@ export default function Company() {
     getCompany();
   }, [handle]);
 
+  const applyHandler = async (id) => {
+    await JoblyApi.applyToJob(id);
+    setCurrentUser({
+      ...currentUser,
+      jobs: [...currentUser.jobs, { id }]
+    });
+  }
+
+  const checkAppliedFor = (id) => {
+    for (let [k, v] of Object.entries(currentUser.jobs)) {
+      if (v.id === id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   if (isLoading) {
     return <p>Loading &hellip;</p>;
   }
@@ -34,7 +53,10 @@ export default function Company() {
           <h4 className="mt-5">{company.name}</h4>
           <p>{company.description}</p>
           {jobs.map(job => (<JobCard 
+            appliedFor={checkAppliedFor(job.id)}
+            applyHandler={applyHandler}
             equity={job.equity}
+            id={job.id}
             key={job.id}
             salary={job.salary}
             title={job.title}
